@@ -8,30 +8,32 @@
 int main(){
     Chronometer timer;
 
+    //record time to init array
+    timer.start();
     int * data = new int[SIZE];
 
-    for(int i = 0; i < SIZE; ++i){
-        data[i] = i;
-    }
-
-    timer.start();
-
-    std::vector<int> test(SIZE);
-    for(int j = 0; j < SIZE; ++j){
-        test[j] = data[j];
-    }
-
+    int i = SIZE;
+    while(i-- )
+        data[i] = SIZE;
+    
+    //get time and print it
     timer.stop();
+    std::cout << "Time to init array " << timer.getNanosec() << " nanoseconds\n";
+    std::cout << "Time to init array " << timer.getMillisec() << " milliseconds\n";
+    std::cout << "Time to init array " << timer.getMicrosec() << " microseconds\n";
+    std::cout << "Time to init array " << timer.getSec() << " seconds\n";            
 
-    timer.print("microseconds");
-
+    //record time to init vector.
     timer.start();
+    std::vector<int> test(SIZE, SIZE);   
 
-    memcpy(test.data(),data,sizeof(int)*SIZE);
-
+    // and print it
     timer.stop();
-
+    timer.print("nanoseconds");
+    timer.print("milliseconds");
     timer.print("microseconds");
+    timer.print("seconds");
 
+    delete [] data;
     return 0;
 }

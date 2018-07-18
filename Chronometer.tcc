@@ -30,45 +30,55 @@ class Chronometer {
         void stop(){
             delta = std::chrono::high_resolution_clock::now() - begin;
         }
-
-        void print(const char unit[], const char message[]){
-
-            if(unit == "milliseconds")
-                delta = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-            else if(unit == "nanoseconds")
-                delta = std::chrono::duration_cast<std::chrono::nanoseconds>(delta);
-            else if(unit == "microseconds")
-                delta = std::chrono::duration_cast<std::chrono::microseconds>(delta);
-            else if(unit == "seconds")
-                delta = std::chrono::duration_cast<std::chrono::seconds>(delta);
-            else {
-                std::cerr << "invalid option selected, defaulting to milliseconds\n";
-                delta = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-            }
-
-            if(message == NULL)
-                std::cout << "Time elapsed: " << delta.count() << "\n";
-            else   
-                std::cout << "Time elapsed " << message << " " << delta.count() << "\n";
-        }
-
+            
         /// prints time elapsed in selected unit. Options are milliseconds, nanoseconds, microseconds, and seconds.
         void print(const char unit[]){
 
-            if(unit == "milliseconds")
-                delta = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-            else if(unit == "nanoseconds")
-                delta = std::chrono::duration_cast<std::chrono::nanoseconds>(delta);
-            else if(unit == "microseconds")
-                delta = std::chrono::duration_cast<std::chrono::microseconds>(delta);
-            else if(unit == "seconds")
-                delta = std::chrono::duration_cast<std::chrono::seconds>(delta);
-             else {
-                std::cerr << "invalid option selected, defaulting to milliseconds\n";
-                delta = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-            }
+            if(unit == "milliseconds"){
+                auto tmp = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
+                std::cout << "Time elapsed: " << tmp.count() << " milliseconds\n";
 
-            std::cout << "Time elapsed: " << delta.count() << "\n";
+            } else if(unit == "nanoseconds") {
+                auto tmp = std::chrono::duration_cast<std::chrono::nanoseconds>(delta);
+                std::cout << "Time elapsed: " << tmp.count() << " nanoseconds\n";
+
+            } else if(unit == "microseconds"){
+                auto tmp = std::chrono::duration_cast<std::chrono::microseconds>(delta);
+                std::cout << "Time elapsed: " << tmp.count() << " microseconds\n";
+
+            } else if(unit == "seconds") {
+                auto tmp = std::chrono::duration_cast<std::chrono::seconds>(delta);
+                std::cout << "Time elapsed: " << tmp.count() << " seconds\n";
+
+            } else {
+                std::cerr << "invalid option selected, defaulting to milliseconds\n";
+                auto tmp = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
+                std::cout << "Time elapsed: " << tmp.count() << "milliseconds\n";
+            }
+        }
+
+        /// return stored number of milliseconds
+        auto getMillisec(){
+            auto ret = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
+            return ret.count();
+        }
+
+        /// return stored number of nanoseconds 
+        auto getNanosec(){
+            auto ret = std::chrono::duration_cast<std::chrono::nanoseconds>(delta);
+            return ret.count();
+        }
+
+        /// return stored number of microseconds
+        auto getMicrosec(){
+            auto ret = std::chrono::duration_cast<std::chrono::microseconds>(delta);
+            return ret.count();
+        }
+
+        /// return stored number of seconds
+        auto getSec(){
+            auto ret = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
+            return ret.count();
         }
 
         /// Returns recorded duration.

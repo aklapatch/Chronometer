@@ -1,2 +1,2 @@
 unix:
-	g++ test.cc -o test.out
+	g++ -O2 test.cc -o test.out
