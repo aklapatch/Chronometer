@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Chronometer.tcc"
 #include <vector>
-#include<cstring>
 
 #define SIZE 1000
 
