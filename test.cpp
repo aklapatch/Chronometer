@@ -12,8 +12,9 @@ int main(){
     int * data = new int[SIZE];
 
     int i = SIZE;
-    while(i-- )
+    while(i-- ){
         data[i] = SIZE;
+    }
     
     //get time and print it
     timer.stop();
@@ -21,6 +22,8 @@ int main(){
     std::cout << "Time to init array " << timer.getMillisec() << " milliseconds\n";
     std::cout << "Time to init array " << timer.getMicrosec() << " microseconds\n";
     std::cout << "Time to init array " << timer.getSec() << " seconds\n";            
+
+    delete [] data;
 
     //record time to init vector.
     timer.start();
@@ -33,6 +36,5 @@ int main(){
     timer.print("microseconds");
     timer.print("seconds");
 
-    delete [] data;
     return 0;
 }

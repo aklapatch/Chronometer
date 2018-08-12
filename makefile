@@ -1,5 +1,5 @@
 utest:
-	g++ -O2 test.cc -o test.out
+	g++ -O2 test.cpp -o test.out
 
 uclean:
 	rm *.out
