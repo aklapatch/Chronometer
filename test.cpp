@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Chronometer.tcc"
+#include "Chronometer.hpp"
 #include <vector>
 
 #define SIZE 1000
