@@ -2,7 +2,7 @@
 #include "Chronometer.hpp"
 #include <vector>
 
-#define SIZE 1000
+#define SIZE 10000000
 
 int main(){
     Chronometer timer;
