@@ -34,19 +34,19 @@ class Chronometer {
         /// prints time elapsed in selected unit. Options are milliseconds, nanoseconds, microseconds, and seconds.
         void print(const char unit[]){
 
-            if(unit == "milliseconds"){
+            if(unit == "ms"){
                 auto tmp = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
                 std::cout << "Time elapsed: " << tmp.count() << " milliseconds\n";
 
-            } else if(unit == "nanoseconds") {
+            } else if(unit == "ns") {
                 auto tmp = std::chrono::duration_cast<std::chrono::nanoseconds>(delta);
                 std::cout << "Time elapsed: " << tmp.count() << " nanoseconds\n";
 
-            } else if(unit == "microseconds"){
+            } else if(unit == "us"){
                 auto tmp = std::chrono::duration_cast<std::chrono::microseconds>(delta);
                 std::cout << "Time elapsed: " << tmp.count() << " microseconds\n";
 
-            } else if(unit == "seconds") {
+            } else if(unit == "s") {
                 auto tmp = std::chrono::duration_cast<std::chrono::seconds>(delta);
                 std::cout << "Time elapsed: " << tmp.count() << " seconds\n";
 
@@ -77,7 +77,7 @@ class Chronometer {
 
         /// return stored number of seconds
         auto getSec(){
-            auto ret = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
+            auto ret = std::chrono::duration_cast<std::chrono::seconds>(delta);
             return ret.count();
         }
 

@@ -31,10 +31,10 @@ int main(){
 
     // and print it
     timer.stop();
-    timer.print("nanoseconds");
-    timer.print("milliseconds");
-    timer.print("microseconds");
-    timer.print("seconds");
+    timer.print("ns");
+    timer.print("ms");
+    timer.print("us");
+    timer.print("s");
 
     return 0;
 }
