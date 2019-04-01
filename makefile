@@ -1,5 +1,6 @@
-utest:
-	g++ -O2 test.cpp -o test.out
+test: test.cpp
+	g++ -O2 test.cpp -fconcepts -o test.out
+	./test.out
 
-uclean:
+clean:
 	rm *.out

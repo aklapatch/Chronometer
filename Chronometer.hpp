@@ -33,28 +33,30 @@ class Chronometer {
             
         /// prints time elapsed in selected unit. Options are milliseconds, nanoseconds, microseconds, and seconds.
         void print(const char unit[]){
+			
+			std::cout << "Time elapsed: ";
 
             if(unit == "ms"){
-                auto tmp = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-                std::cout << "Time elapsed: " << tmp.count() << " milliseconds\n";
+				auto tmp = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
+                std::cout << tmp.count() << " milliseconds\n";
 
             } else if(unit == "ns") {
                 auto tmp = std::chrono::duration_cast<std::chrono::nanoseconds>(delta);
-                std::cout << "Time elapsed: " << tmp.count() << " nanoseconds\n";
+                std::cout << tmp.count() << " nanoseconds\n";
 
             } else if(unit == "us"){
                 auto tmp = std::chrono::duration_cast<std::chrono::microseconds>(delta);
-                std::cout << "Time elapsed: " << tmp.count() << " microseconds\n";
+                std::cout << tmp.count() << " microseconds\n";
 
             } else if(unit == "s") {
                 auto tmp = std::chrono::duration_cast<std::chrono::seconds>(delta);
-                std::cout << "Time elapsed: " << tmp.count() << " seconds\n";
+                std::cout << tmp.count() << " seconds\n";
 
             } else {
                 std::cerr << "invalid option selected, defaulting to milliseconds\n";
                 auto tmp = std::chrono::duration_cast<std::chrono::milliseconds>(delta);
-                std::cout << "Time elapsed: " << tmp.count() << "milliseconds\n";
-            }
+                std::cout << tmp.count() << "milliseconds\n";
+            }            
         }
 
         /// return stored number of milliseconds

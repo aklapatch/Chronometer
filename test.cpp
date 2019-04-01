@@ -1,40 +1,70 @@
 #include <iostream>
 #include "Chronometer.hpp"
 #include <vector>
+#include <chrono>
+#include <thread>
 
-#define SIZE 10000000
+using namespace std;
+
+#define ERRTHRESH 1000
+#define MULT 1000
+
+void printTestResult(bool Result, const char * TestName){
+	
+	cout << "\nTest: " << TestName;
+	
+	if (Result)
+		cout << " PASSED.\n";
+		
+	else 
+		cout << " FAILED.\n";
+}
+
+void outputResults(auto Result, auto ExpectedValue, auto Error, auto Threshold){
+	cout << "Actual value= " << Result << "\nExpected value = " << ExpectedValue;
+	cout << " Error = " << Error << "\nError Threshold= " << Threshold << "\n";
+	
+		  
+}
+
+void testError(auto Expected, auto Result, auto ErrorThreshold, const char * TestName){
+	
+	printTestResult(ErrorThreshold > Result - Expected,  TestName);
+    outputResults(Result, Expected , Result - Expected, ErrorThreshold);
+}
 
 int main(){
-    Chronometer timer;
-
-    //record time to init array
-    timer.start();
-    int * data = new int[SIZE];
-
-    int i = SIZE;
-    while(i-- ){
-        data[i] = SIZE;
-    }
+    Chronometer Timer;
     
-    //get time and print it
-    timer.stop();
-    std::cout << "Time to init array " << timer.getNanosec() << " nanoseconds\n";
-    std::cout << "Time to init array " << timer.getMillisec() << " milliseconds\n";
-    std::cout << "Time to init array " << timer.getMicrosec() << " microseconds\n";
-    std::cout << "Time to init array " << timer.getSec() << " seconds\n";            
+    cout << "\n If a test fails, all subsequent tests are not valid even if they pass.\n";
+    
+    // seconds test
+    int Interval = 1;
+    
+    
+    Timer.start();
+    this_thread::sleep_for(chrono::seconds(Interval));
+    Timer.stop();
+    
+    int Result = Timer.getSec();
+    
+    printTestResult(Result == Interval,  "getSecond() ");
+    outputResults(Result , Interval, Result - Interval, 0);
+    
+	// test getMillsec
+	testError(MULT*Timer.getSec(), Timer.getMillisec(), ERRTHRESH , "getMillisec()");  
+		
+	// get Microsec
+	testError(MULT*Timer.getMillisec(), Timer.getMicrosec(), ERRTHRESH , "getMicrosec()");
 
-    delete [] data;
-
-    //record time to init vector.
-    timer.start();
-    std::vector<int> test(SIZE, SIZE);   
-
-    // and print it
-    timer.stop();
-    timer.print("ns");
-    timer.print("ms");
-    timer.print("us");
-    timer.print("s");
+	// get Nanosec
+	testError(MULT*Timer.getMicrosec(), Timer.getNanosec(), ERRTHRESH , "getNanosec()");	
+    
+    cout << "\n Testing printing functions\n"; 
+    Timer.print("ns");
+    Timer.print("us");
+    Timer.print("ms");
+    Timer.print("s");
 
     return 0;
 }
